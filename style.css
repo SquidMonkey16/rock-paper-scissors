@@ -1,0 +1,47 @@
+* {
+    background-color: lavender;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 24px;
+}
+
+.all {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+.buttons {
+    display: flex;
+    gap: 100px;
+}
+
+img {
+    background-color: burlywood;
+}
+
+.results {
+    font-weight: 700;
+}
+
+.game-winner {
+    font-size: 34px;
+    font-weight: 900;
+}
+
+button {
+    width: 200px;
+    height: 200px;
+    font-size: 34px;
+    border-radius: 30px;
+    border-width: 5px;
+    border-style: dashed;
+    background-color: burlywood;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}

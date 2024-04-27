@@ -3,14 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Rock Paper Scissors</title>
 </head>
 <body>
+    <div class="all">
+        <div class="score"></div>
+        <div class="buttons">
+            <button id="rock"><img src="images/rock.png" alt="rock" width="150">Rock</button>
+            <button id="paper"><img src="images/paper.png" alt="paper" width="130">Paper</button>
+            <button id="scissors"><img src="images/scissors.png" alt="scissors" width="130">Scissors</button>
+        </div>
+        <div class="results"></div>
+        <div class="game-winner"></div>
+    </div>
     <script>
         let computerSelection;
         let playerSelection;
         let computerScore = 0;
         let playerScore = 0;
+
+        let rockBtn = document.querySelector("#rock");
+        let paperBtn = document.querySelector("#paper");
+        let scissorsBtn = document.querySelector("#scissors");
+        let score = document.querySelector(".score");
+        let results = document.querySelector(".results");
+        let gameWinner = document.querySelector(".game-winner");
+
+        rockBtn.addEventListener("click", () => {
+            if (playerScore < 5 && computerScore < 5)
+            {
+                playerSelection = "Rock";
+                playRound();
+                showScore();
+            }
+        })
+
+        paperBtn.addEventListener("click", () => {
+            if (playerScore < 5 && computerScore < 5)
+            {
+                playerSelection = "Paper";
+                playRound();
+                showScore();
+            }
+        })
+
+        scissorsBtn.addEventListener("click", () => {
+            if (playerScore < 5 && computerScore < 5)
+            {
+                playerSelection = "Scissors";
+                playRound();
+                showScore();
+            }
+        })
 
         function getComputerChoice()
         {
@@ -24,58 +69,46 @@
                 return "Scissors";
         }
 
-        function getPlayerChoice()
-        {
-            let choice = prompt("Enter Rock, Paper, or Scissors:");
-            
-            while (choice === null || choice.toLowerCase() != "rock" && choice.toLowerCase() != "paper" && choice.toLowerCase() != "scissors")
-            {
-                choice = prompt("Enter Rock, Paper, or Scissors:");
-            }
-
-            return choice.charAt(0).toUpperCase() + choice.slice(1).toLowerCase();
-        }
-
         function playRound()
         {
             computerSelection = getComputerChoice();
-            playerSelection = getPlayerChoice();
 
             if (playerSelection == "Rock" && computerSelection == "Scissors"
              || playerSelection == "Scissors" && computerSelection == "Paper"
              || playerSelection == "Paper" && computerSelection == "Rock")
             {
                 playerScore++;
-                return "You win! " + playerSelection + " beats " + computerSelection;
+                results.style.color = "limegreen";
+                results.textContent = "You win! " + playerSelection + " beats " + computerSelection;
             }
             else if (playerSelection == "Scissors" && computerSelection == "Rock"
              || playerSelection == "Paper" && computerSelection == "Scissors"
              || playerSelection == "Rock" && computerSelection == "Paper")
              {
                 computerScore++;
-                return "You lose! " + computerSelection + " beats " + playerSelection;
+                results.style.color = "red";
+                results.textContent = "You lose! " + computerSelection + " beats " + playerSelection;
              }
              else if (playerSelection == computerSelection)
-                return "It's a tie! You both chose " + computerSelection;
+             {
+                results.style.color = "black";
+                results.textContent = "It's a tie! You both chose " + computerSelection;
+             }
         }
 
-        function playGame()
+        function showScore()
         {
-            for (let i = 0; i < 5; ++i)
+            score.textContent = "You: " + playerScore + " Computer: " + computerScore;
+            if (playerScore == 5 || computerScore == 5)
             {
-                console.log(playRound());
-                console.log("You: " + playerScore + " Computer: " + computerScore + "\n ");
+                if (playerScore > computerScore)
+                    gameWinner.textContent = "You won that game " + playerScore + " to " + computerScore + "!";
+                else if (playerScore < computerScore)
+                    gameWinner.textContent = "You lost that game " + playerScore + " to " + computerScore + ".";
+                else if (playerScore == computerScore)
+                    gameWinner.textContent = "You tied with the computer " + playerScore + " to " + computerScore + "!";
             }
-
-            if (playerScore > computerScore)
-                console.log("You won that game " + playerScore + " to " + computerScore + "!");
-            else if (playerScore < computerScore)
-                console.log("You lost that game " + playerScore + " to " + computerScore + ".");
-            else if (playerScore == computerScore)
-                console.log("You tied with the computer " + playerScore + " to " + computerScore + "!");
         }
-
-        playGame();
     </script>
 </body>
 </html>
